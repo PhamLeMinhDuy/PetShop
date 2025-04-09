@@ -1,8 +1,6 @@
 import AuthPage from "../pages/AuthenticationPage/AuthenticationPage";
 import HomePage from "../pages/HomePage/HomePage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import OrderPage from "../pages/OrderPage/OrderPage";
-import ProductPage from "../pages/ProductPage/ProductPage";
 import PetListPage from "../pages/PetPages/PetListPage/PetListPage";
 import PetDetailPage from "../pages/PetPages/PetDetailPage/PetDetailPage";
 import CartPage from "../pages/CartPage/CartPage";
@@ -22,11 +20,6 @@ export const routes = [
     {
         path: '/auth',
         page: AuthPage,
-    },
-    {
-        path: '/order',
-        page: OrderPage,
-        isShowHeader: true,
     },
     {
         path: '/order-history',
@@ -56,11 +49,6 @@ export const routes = [
     {
         path: '/contact',
         page: ContactPage,
-        isShowHeader: true,
-    },
-    {
-        path: '/products',
-        page: ProductPage,
         isShowHeader: true,
     },
     {

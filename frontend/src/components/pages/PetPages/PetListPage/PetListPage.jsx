@@ -21,7 +21,7 @@ const PetListPage = () => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/pets/type/${type}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/pets/type/${type}`);
         setPets(response.data);
 
         // Lấy danh sách giống không trùng lặp

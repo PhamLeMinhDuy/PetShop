@@ -13,7 +13,7 @@ const Header = () => {
       if (!user) return;
 
       try {
-        const res = await fetch(`http://localhost:5000/api/orders/user/${user._id}`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/orders/user/${user._id}`);
         const data = await res.json();
 
         // Lọc đơn hàng có trạng thái pending

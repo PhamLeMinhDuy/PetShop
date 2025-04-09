@@ -15,7 +15,7 @@ const CartPage = () => {
 
   const handleDeleteOrder = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/remove/${orderToDelete}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/orders/remove/${orderToDelete}`, {
         method: "DELETE",
       });
       const data = await response.json();
@@ -40,7 +40,7 @@ const CartPage = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/orders/create-checkout-session", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/orders/create-checkout-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const CartPage = () => {
     const fetchOrders = async () => {
       if (!user) return;
       try {
-        const response = await fetch(`http://localhost:5000/api/orders/user/${user._id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/orders/user/${user._id}`);
         const data = await response.json();
         setOrders(data.orders);
       } catch (error) {
