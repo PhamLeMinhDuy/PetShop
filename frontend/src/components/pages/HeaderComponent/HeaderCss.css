@@ -1,0 +1,33 @@
+/* Tinh chỉnh menu mobile */
+.mobile-menu {
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4); /* Bóng đổ rõ hơn */
+  }
+  
+  .mobile-menu a {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .mobile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  
+  /* Overlay mượt mà hơn */
+  .overlay {
+    transition: opacity 0.4s ease-in-out;
+  }
+  
+  /* Đảm bảo menu trượt mượt */
+  .animate-slide-right {
+    animation: slideRight 0.4s ease-in-out forwards;
+  }
+  
+  @keyframes slideRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }

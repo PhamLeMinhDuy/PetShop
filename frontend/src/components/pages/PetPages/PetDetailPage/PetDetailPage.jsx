@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { useCart } from "../../../context/CartContext";
-import AuthContext from "../../../context/AuthContext"; // ✅ Import AuthContext
+import AuthContext from "../../../context/AuthContext";
 
 const PetDetailPage = () => {
   const { id } = useParams();
@@ -9,7 +9,7 @@ const PetDetailPage = () => {
   const [pet, setPet] = useState(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
-  const { user } = useContext(AuthContext); // ✅ Lấy user từ context
+  const { user } = useContext(AuthContext);
   const [orderStatus, setOrderStatus] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ const PetDetailPage = () => {
     fetchPetDetail();
   }, [id]);
 
-  // 🛒 Hàm gọi API đặt hàng
   const handleAddToCart = async () => {
     if (!pet) return;
     if (!user) {
@@ -40,8 +39,8 @@ const PetDetailPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: user._id, // ✅ Lấy userId từ user đăng nhập
-          items: [{ petId: pet._id, name: pet.name, price: pet.price, quantity: 1 }]
+          userId: user._id,
+          items: [{ petId: pet._id, name: pet.name, price: pet.price, quantity: 1 }],
         }),
       });
 
@@ -58,45 +57,61 @@ const PetDetailPage = () => {
     }
   };
 
-  if (loading) return <p className="text-center text-gray-500">⏳ Đang tải dữ liệu...</p>;
-  if (!pet) return <p className="text-center text-red-500 font-semibold">🐾 Không tìm thấy thú cưng...</p>;
+  if (loading)
+    return <p className="text-center text-gray-500">⏳ Đang tải dữ liệu...</p>;
+  if (!pet)
+    return (
+      <p className="text-center text-red-500 font-semibold">
+        🐾 Không tìm thấy thú cưng...
+      </p>
+    );
 
   return (
-    <div className="container mx-auto p-6 flex flex-col lg:flex-row items-center lg:items-start gap-8">
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6">
       {/* Ảnh thú cưng */}
       <div className="w-full lg:w-1/2">
-        <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-xl">
-          <img src={pet.image} alt={pet.name} className="w-full h-full object-cover" />
+        <div className="relative w-full h-[300px] sm:h-[400px] rounded-xl overflow-hidden shadow-lg">
+          <img
+            src={pet.image}
+            alt={pet.name}
+            className="w-full h-full object-cover object-center"
+          />
           <div className="absolute inset-0 bg-black bg-opacity-10 hover:bg-opacity-20 transition duration-300"></div>
         </div>
       </div>
 
       {/* Thông tin thú cưng */}
-      <div className="w-full lg:w-1/2 bg-white p-6 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-gray-800">{pet.name}</h2>
-        <p className="text-gray-500 italic text-lg capitalize">🐾 {pet.type}</p>
+      <div className="w-full lg:w-1/2 bg-white p-5 sm:p-6 rounded-xl shadow-lg">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">{pet.name}</h2>
+        <p className="text-gray-500 italic text-base sm:text-lg capitalize">
+          🐾 {pet.type}
+        </p>
 
-        <div className="mt-4 space-y-2">
-          <p className="text-gray-700 text-lg">
+        <div className="mt-4 space-y-2 text-base sm:text-lg">
+          <p className="text-gray-700">
             🎨 <span className="font-semibold">Màu sắc:</span> {pet.color}
           </p>
-          <p className="text-gray-700 text-lg">
+          <p className="text-gray-700">
             📏 <span className="font-semibold">Kích thước:</span> {pet.size}
           </p>
-          <p className="text-gray-700 text-lg">
+          <p className="text-gray-700">
             🔢 <span className="font-semibold">Độ tuổi:</span> {pet.age} tuổi
           </p>
-          <p className="text-gray-700 text-xl font-semibold">
+          <p className="text-gray-800 text-xl font-semibold">
             💰 Giá: <span className="text-orange-500">{pet.price} USD</span>
           </p>
         </div>
 
-        {/* Hiển thị trạng thái đặt hàng */}
-        {orderStatus && <p className="mt-4 text-center text-green-600 font-semibold">{orderStatus}</p>}
+        {/* Trạng thái đơn hàng */}
+        {orderStatus && (
+          <p className="mt-4 text-center text-green-600 font-semibold">
+            {orderStatus}
+          </p>
+        )}
 
         {/* Nút thêm vào giỏ hàng */}
         <button
-          className="mt-6 w-full bg-orange-500 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-orange-600 transition duration-300"
+          className="mt-6 w-full bg-orange-500 text-white py-3 rounded-lg font-semibold text-base sm:text-lg shadow hover:bg-orange-600 transition"
           onClick={handleAddToCart}
         >
           🛒 Thêm vào giỏ hàng
@@ -104,7 +119,7 @@ const PetDetailPage = () => {
 
         {/* Nút quay lại */}
         <button
-          className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-gray-400 transition duration-300"
+          className="mt-4 w-full bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold text-base sm:text-lg shadow hover:bg-gray-400 transition"
           onClick={() => navigate(-1)}
         >
           🔙 Quay lại
