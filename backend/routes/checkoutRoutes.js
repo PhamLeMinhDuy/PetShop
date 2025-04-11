@@ -28,8 +28,8 @@ router.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `http://localhost:3000/payment-success?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}`, // Truyền userId vào success_url
-      cancel_url: "http://localhost:3000/payment-cancel",
+      success_url: `${process.env.CLIENT_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}`,
+      cancel_url: `${process.env.CLIENT_URL}/payment-cancel`,
       client_reference_id: userId, // Thêm userId vào client_reference_id để có thể lấy từ Stripe webhook sau này
       metadata: {
         order_ids: orders.map(order => order._id).join(","), // Lưu danh sách order_ids
