@@ -3,6 +3,7 @@ import AuthContext from "../../context/AuthContext";
 import { registerUser, loginUser } from "../../../api/auth"; 
 import { useNavigate } from "react-router-dom";
 import "./AuthenticationPage.css";
+import Swal from "sweetalert2";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,11 +23,17 @@ const AuthPage = () => {
         const userData = await loginUser({ email: form.email, password: form.password });
         localStorage.setItem("token", userData.token);
         login(userData);
-        alert("Đăng nhập thành công!");
+        Swal.fire({
+          icon: "success",
+          title: "Đăng nhập thành công!",
+        });        
         navigate("/");
       } else {
         if (form.password !== form.confirmPassword) {
-          alert("Mật khẩu nhập lại không khớp!");
+          Swal.fire({
+            icon: "warning",
+            title: "Mật khẩu nhập lại không khớp!",
+          });
           return;
         }
 
@@ -34,11 +41,18 @@ const AuthPage = () => {
         const name = form.email.split("@")[0];
         const finalUserData = { ...userData, name, role: "user" };
         login(finalUserData);
-        alert("Đăng ký thành công!");
+        Swal.fire({
+          icon: "success",
+          title: "Đăng ký thành công!",
+        });        
         setIsLogin(true);
       }
     } catch (error) {
-      alert(error.message || "Có lỗi xảy ra!");
+      Swal.fire({
+        icon: "error",
+        title: "Có lỗi xảy ra!",
+        text: error.message || "Vui lòng thử lại sau.",
+      });
     }
   };
 
