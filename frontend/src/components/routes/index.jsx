@@ -10,12 +10,22 @@ import UserProfile from "../pages/UserProfilePage/UserProfilePage";
 import PaymentSuccess from "../pages/Payments/PaymentSuccess";
 import PaymentCancel from "../pages/Payments/PaymentCancel";
 import OrderHistoryPage from "../pages/OrderHistoryPage/OrderHistoryPage";
+import ForgotPasswordPage from "../pages/AuthenticationPage/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/AuthenticationPage/ResetPasswordPage";
 
 export const routes = [
     {
         path: '/',
         page: HomePage,
         isShowHeader: true,
+    },
+    {
+        path: '/forgot-password',
+        page: ForgotPasswordPage,
+    },
+    {
+        path: '/reset-password/:token',
+        page: ResetPasswordPage,
     },
     {
         path: '/auth',

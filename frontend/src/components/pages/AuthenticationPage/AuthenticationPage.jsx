@@ -16,6 +16,7 @@ const AuthPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       if (isLogin) {
         const userData = await loginUser({ email: form.email, password: form.password });
@@ -97,14 +98,37 @@ const AuthPage = () => {
         </button>
       </form>
 
-      <p className="mt-4 font-medium text-sm sm:text-base text-center">
-        {isLogin ? "Chưa có tài khoản?" : "Đã có tài khoản?"}{" "}
+      {isLogin && (
         <button
-          onClick={() => setIsLogin(!isLogin)}
-          className="text-orange-600 font-bold hover:underline"
+          className="mt-2 text-sm text-white hover:underline"
+          onClick={() => navigate("/forgot-password")}
         >
-          {isLogin ? "Đăng ký ngay" : "Đăng nhập"}
+          Quên mật khẩu?
         </button>
+      )}
+
+      <p className="mt-4 font-medium text-sm sm:text-base text-center">
+        {isLogin ? (
+          <>
+            Chưa có tài khoản?{" "}
+            <button
+              onClick={() => setIsLogin(false)}
+              className="text-blue-400 font-bold hover:underline"
+            >
+              Đăng ký ngay
+            </button>
+          </>
+        ) : (
+          <>
+            Đã có tài khoản?{" "}
+            <button
+              onClick={() => setIsLogin(true)}
+              className="text-orange-600 font-bold hover:underline"
+            >
+              Đăng nhập
+            </button>
+          </>
+        )}
       </p>
     </div>
   );

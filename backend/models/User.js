@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema({
     wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }], // ❤️ Sản phẩm yêu thích
     orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }], // 📦 Lịch sử đơn hàng
     role: { type: String, enum: ["user", "admin"], default: "user" }, // ✅ Mặc định "user"
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", UserSchema);

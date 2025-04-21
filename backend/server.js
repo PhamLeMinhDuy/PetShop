@@ -9,6 +9,7 @@ const userRoutes = require("./routes/userRoutes")
 const orderRoutes = require("./routes/orderRoutes");
 const checkoutRoutes = require('./routes/checkoutRoutes');
 const webhookRoute = require("./routes/webhook");
+const passwordRoutes = require("./routes/passwordRoutes");
 
 dotenv.config();
 connectDB();
@@ -17,6 +18,7 @@ const app = express();
 
 // ❗️ Bước 1: Middleware cho CORS (OK)
 app.use(cors());
+
 
 // ❗️ Bước 2: Webhook cần đặt TRƯỚC express.json() để giữ raw body
 app.use("/api/webhook", express.raw({ type: 'application/json' }), webhookRoute);
@@ -31,6 +33,7 @@ app.use("/api/pets", petRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/orders", checkoutRoutes);
+app.use("/api/password", passwordRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server chạy trên port ${PORT}`));
